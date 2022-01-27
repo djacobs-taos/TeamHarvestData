@@ -11,6 +11,9 @@ headers = {
     "Harvest-Account-Id": os.environ.get("ACCOUNT_ID")
 }
 
+role_id = os.environ.get("HARVEST_ROLE")
+
+
 def fetchTeam(role_id, headers):
     url = "https://api.harvestapp.com/v2/roles/" + role_id
     request = urllib.request.Request(url=url, headers=headers)
@@ -20,11 +23,11 @@ def fetchTeam(role_id, headers):
     resp = jsonResponse['user_ids']
     pp.pprint(resp)
     return(resp)
-    
+
 
 url = "https://api.harvestapp.com/v2/reports/time/team?from=20220123&to=20220129"
 
-role_id = os.environ.get("HARVEST_ROLE")
+
 user_ids = fetchTeam(role_id, headers)
 request = urllib.request.Request(url=url, headers=headers)
 response = urllib.request.urlopen(request, timeout=5)
@@ -33,5 +36,4 @@ jsonResponse = json.loads(responseBody)
 
 data = jsonResponse["results"]
 for user in user_ids:
-    pp.pprint(list(filter(lambda x:x["user_id"]==user, data)))
-
+    pp.pprint(list(filter(lambda x: x["user_id"] == user, data)))
