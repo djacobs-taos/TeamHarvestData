@@ -7,3 +7,7 @@ HARVEST_TOKEN = your harvest token
 
 ACCOUNT_ID    = the account id for harvest
 
+to run this:
+src/fetchmyteam.py
+
+will return JSON.
